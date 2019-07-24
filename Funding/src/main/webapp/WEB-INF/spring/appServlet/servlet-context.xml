@@ -14,8 +14,10 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-	<!-- 	<resources location="/WEB-INF/views/include/" mapping="/include/**"/>	views폴더 밑에 폴더 생성시 한줄씨 추가
-			<resources location="/WEB-INF/views/images/" mapping="/images/**"/> -->
+	<!-- WEB-INF/views/ 폴더 밑에 새로운 폴더 생성 시 경로 추가
+	<resources location="/WEB-INF/views/include/" mapping="/include/**"/>
+	<resources location="/WEB-INF/views/images/" mapping="/images/**"/>
+	 -->
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -30,7 +32,7 @@
 		<beans:property value="10485760" name="maxUploadSize"/>
 	</beans:bean>
 	<beans:bean class="java.lang.String" id="uploadPath">
-		<beans:constructor-arg value="C:/upload"/>	<!-- value값에 파일업로드시 저장할 폴더 경로 지정 -->
+		<beans:constructor-arg value="C:/upload"/>		<!-- value값에 파일 업로드시 파일 저장할 폴더 경로 지정 -->
 	</beans:bean>
 	
 </beans:beans>
