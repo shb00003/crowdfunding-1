@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 선언 -->
+<mapper namespace= "com.crowd.funding.mapper.orderMapper">
+	<select id="callReward">
+		select `reward_id`,`pro_id`,`mem_id,`reward_title`, `reward_price`, `reward_sell_count`  
+		from reward_item 
+		where pro_id = #{pro_id}
+	</select>
+	
+
+</mapper>
