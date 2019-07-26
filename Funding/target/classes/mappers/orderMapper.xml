@@ -3,12 +3,25 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace 선언 -->
+
+<!-- int order_id; // reward_order_T 의 PrimaryKey
+	int mem_idx; // member_T의 primary Key
+	String mem_email; // 주문 창에서 입력하는 email
+	String order_name; // 주문 창에서 입력하는 name
+	String mem_phone; // 주문 창에서 입력하는 email
+	int total_money; // 최종 금액 이나 필요 없을 수 있다.getTotalMoney 함수로 대체 가능함.
+	String order_requests; // 배송시 요청사항
+	int order_status; // 결제 승인 여부
+	String order_address1; //우편번호
+	String order_address2; //도로명주소
+	String order_address3; //지번주소
+	String order_address4; //상세주소
+-->
+
 <mapper namespace= "com.crowd.funding.mapper.orderMapper">
-	<select id="callReward">
-		select `reward_id`,`pro_id`,`mem_id,`reward_title`, `reward_price`, `reward_sell_count`  
-		from reward_item 
-		where pro_id = #{pro_id}
-	</select>
+	<!-- 주문 창에서 입력한 내용 저장  -->
+	<insert id = "order_insert">
 	
+	</insert>
 
 </mapper>
