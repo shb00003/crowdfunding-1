@@ -1,16 +1,30 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/include/head.jsp"%>
 <html>
 <head>
-	<title>Home</title>
+<%@ include file="/WEB-INF/views/include/script.jsp"%>
+<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
+	<h1>펀딩하기 화면 시작</h1>
+	<button type="button" class="fbtn">펀딩하기</button>
+	<form role="form" id="send_pro_id" method="get"
+		action="${path}/reward/step10">
+		<!--<input type="hidden" value="${project.pro_id}">  -->
+		<input type="hidden" name="pro_id" value="2">
+	</form>
+	<script>
+		$(document).ready(function() {
 
-<P>  The time on the server is ${serverTime}. </P>
+			var formObj = $("form[role='form']");
+			console.log(formObj);
+			
+			$(".fbtn").on("click", function() {
+				formObj.submit();
+			});
+		});
+	</script>
 </body>
+
 </html>

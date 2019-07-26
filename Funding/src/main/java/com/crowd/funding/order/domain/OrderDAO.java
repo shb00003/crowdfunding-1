@@ -1,5 +1,5 @@
 package com.crowd.funding.order.domain;
 
-public class OrderDAO {
+public interface OrderDAO {
 
 }
