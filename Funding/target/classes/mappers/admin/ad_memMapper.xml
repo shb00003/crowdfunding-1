@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 선언 -->
+<mapper namespace= "admin">
+
+<select id="mem_list"
+            resultType="com.crowd.funding.member.model.MemberDTO">
+            select * from member order by mem_idx
+            </select>
+            
+<select id="project_all"
+           resultType="com.crowd.funding.project.model.ProjectDTO">
+           select * from project where pro_type_progress not in (0)
+ 
+
+</select>
+</mapper>
