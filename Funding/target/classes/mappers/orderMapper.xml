@@ -21,7 +21,9 @@
 <mapper namespace= "com.crowd.funding.mapper.orderMapper">
 	<!-- 주문 창에서 입력한 내용 저장  -->
 	<insert id = "order_insert">
-	
+		INSERT INTO  
+		REWARD_ORDER (mem_idx,order_address1,order_address2,order_address3,order_address4)
+		VALUES (2,#{order_address1},#{order_address2},#{order_address3},#{order_address4});
 	</insert>
 
 </mapper>

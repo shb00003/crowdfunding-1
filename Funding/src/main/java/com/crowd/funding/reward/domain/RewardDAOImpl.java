@@ -1,6 +1,7 @@
 package com.crowd.funding.reward.domain;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -20,8 +21,13 @@ public class RewardDAOImpl implements RewardDAO {
 	}
 	
 	@Override
-	public List<RewardDTO> rewardRead(int pro_id) {
-		return sqlSession.selectList(NAMESPACE+".reward_read",pro_id);
+	public List<RewardDTO> rewardAll(int pro_id) {
+		return sqlSession.selectList(NAMESPACE+".reward_all",pro_id);
+	}
+	
+	@Override
+	public List<RewardDTO> rewardSel(int reward_id[]) {
+		return sqlSession.selectList(NAMESPACE+".reward_select", reward_id);
 	}
 
 }
