@@ -15,14 +15,9 @@ public class Ad_ProjectServiceImpl implements Ad_ProjectService {
 	Ad_ProjectDAO ad_ProjectDao;
 	
 	@Override
-	public List<ProjectDTO> projectAll(ProjectDTO dto) {
-		return ad_ProjectDao.projectAll(dto);
+	public List<ProjectDTO> projectAll() {
+		return ad_ProjectDao.projectAll();
 	}
-	
-	@Override
-	public int proType(int pro_type_progress) {
-		return ad_ProjectDao.proType(pro_type_progress);
-	}
-	
+
 
 }

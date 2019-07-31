@@ -12,8 +12,8 @@
             
 <select id="project_all"
            resultType="com.crowd.funding.project.model.ProjectDTO">
-           select * from project where pro_type_progress not in (0)
- 
-
+           select pro_idx, pro_name, maker_name, pro_start, pro_type1 from project p, maker m 
+           where p.maker_idx=m.maker_idx and pro_type1 not in (1)      
 </select>
+
 </mapper>

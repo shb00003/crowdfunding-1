@@ -16,13 +16,8 @@ public class Ad_ProjectDAOImpl implements Ad_ProjectDAO {
 	SqlSession sql;
 
 	@Override
-	public List<ProjectDTO> projectAll(ProjectDTO dto){
-		return sql.selectList("admin.project_all", dto);
+	public List<ProjectDTO> projectAll(){
+		return sql.selectList("admin.project_all");
 	}
 	
-	@Override
-	public int proType(int pro_type_progress) {
-		return sql.selectOne("admin.proType", pro_type_progress);
-	}
-
 }
