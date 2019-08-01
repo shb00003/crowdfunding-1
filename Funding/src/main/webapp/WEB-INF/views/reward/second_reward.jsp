@@ -12,25 +12,38 @@
 <table>
 	<!--tr아래에 선언해야 total이 0으로 초기화가 되지 않음.  -->
 	<c:set var="total" value="0" />
-	<c:forEach items="${rewardSel}" var="reward" varStatus= "status" >
 	<tr>
-		<td>${reward.pro_id}</td>
-		<td>${reward.reward_id}</td>
-		<td>${reward.mem_idx}</td>
-		<td>${reward.reward_title}</td>
-		<td>가격 :<fmt:formatNumber pattern="###,###,###" value="${reward.reward_price * rewardCount[status.index]}"/>원 </td>
-		<td>${reward.reward_sell_count}</td>
-		<td>수량 : ${rewardCount[status.index]}</td>
+		<td>리번</td>
+		<td>리워드 제목</td>
+		<td>리수량</td>
+		<td>리합산</td>
 	</tr>
-	<c:set var="total" value="${total + (reward.reward_price * rewardCount[status.index])}"/>
+	<c:forEach items="${rewardSel.list}" var="reward2">
+		<c:if test="${reward2.reward_id != 0}">
+			<tr>
+				<td>${reward2.reward_id}</td>
+				<td>${reward2.reward_title}</td>
+				<td>${reward2.qty}</td>
+				<td>${reward2.sumAmount}</td>
+			</tr>
+			<c:set var="total" value="${total + reward2.sumAmount}"/>
+		</c:if>
 	</c:forEach>
+
 </table>
-<span>총 가격:</span> <fmt:formatNumber pattern="###,###,###" value= "${total}" /><span>원 </span>
+<p>후원금 ${rewardSel.addDonation}</p>
+<span>총 가격:</span> <fmt:formatNumber pattern="###,###,###" value= "${total+rewardSel.addDonation}" /><span>원 </span>
+<p>펀딩 서포터 </p>
+<span>이름 </span>
+<span>이메일</span>
+<span>휴대폰번호</span>
+
 <br>
 <form role="form" method="post" action="${path}/order/reservation">
 이름 : <input type="text" name="order_name"> 	
 전화번호 : <input type="text" name="mem_phone"> 
 <br><br>	
+
 <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="d_btn">
 <br>
 <input type="hidden" name="order_address1" id="sample4_postcode"  placeholder="우편번호">

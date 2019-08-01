@@ -1,12 +1,16 @@
 package com.crowd.funding.reward.controller;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.crowd.funding.order.service.OrderService;
+import com.crowd.funding.reward.common.FirstDATA;
 import com.crowd.funding.reward.domain.RewardDTO;
 import com.crowd.funding.reward.service.RewardService;
 
@@ -30,13 +34,10 @@ public class RewardController {
 	}
 	
 	@RequestMapping("/step20")
-	public String secondRead(Model model, int reward_id[], RewardDTO rewardDTO, int qty[]) {
-		
-		model.addAttribute("rewardSel", rewardService.rewardSel(reward_id));
-		//model.addAttribute("rewardSel", rewardDTO);
-		
-		model.addAttribute("rewardCount", qty);
-		
+	public  String secondRead(Model model, @ModelAttribute("firstDATA") FirstDATA firstDATA) {
+	
+		model.addAttribute("rewardSel",firstDATA);
+		//model.addAttribute("rewardSel", rewardService.rewardSel(reward_id));		
 		return "/reward/second_reward";
 	}
 }
