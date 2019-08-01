@@ -44,6 +44,5 @@
 			ref="sqlSessionFactory" />
 	</bean>
 	<!-- mybatis mapper interface bean을 자동으로 검색하여 생성함 -->
-	<!-- <mybatis-spring:scan base-package="com.example.spring01.model.memo" 
-		/> -->
+	<mybatis-spring:scan base-package="com.crowd.funding.admin.manager" />
 </beans>
