@@ -13,10 +13,8 @@
 <body>
 	<form role="form" id="send_to_reward20" method="post"
 		action="${path}/reward/step20">
-
-		<!--list 넘기기 test중 잘되면 지워야함.  -->
-		<!-- <input type="hidden" name="list[0].pro_id" value="1">
-		<input type="hidden" name="list[1].pro_id" value="2"> -->
+		<!--멤버 나중에 받아야함.  -->
+		<input type="hidden" name="mem_idx" value="2">
 		<!-- 다른 페이지에서 받아올 값이다.  -->
 		<%-- <input type="hidden" name="mem_idx" value="${member.mem_idx}">
 	    <input type="hidden" name="pro_id" value="${project.pro_id}"> --%>
@@ -38,7 +36,7 @@
 				<input type="hidden" id="reward_price${reward.reward_id}"
 					value="${reward.reward_price}">
 				<input type="hidden" id="reward_remain_count${reward.reward_id}"
-					value="${reward.reward_sell_count - reward.myorderDTO.order_count}">
+					value="${reward.remain_count}">
 				<input type="hidden" name="list[${status.index}].reward_title" value="${reward.reward_title}">
 				<tr>
 					<td>${reward.pro_id}</td>
@@ -47,10 +45,10 @@
 					<td>${reward.reward_title}</td>
 					<td><fmt:formatNumber pattern="###,###,###" value="${reward.reward_price}" />원</td>
 					<td>${reward.reward_sell_count}</td>
-					<td>${reward.reward_sell_count - reward.myorderDTO.order_count}</td>
+					<td>${reward.remain_count}</td>
 					<td><input type="checkbox" name="check_box" id="check_box"
 						value="${reward.reward_id}" class="check_box_js"
-						data-toggle="checkbox"></td>
+						data-toggle="checkbox" ></td>
 					<td class="number"><input type="text" name="before_qty"
 						id="qty${reward.reward_id}" class="before_qty" value="0">
 						<a href="#" class="increaseQuantity">수량 올림</a> <a href="#"
@@ -87,18 +85,46 @@ $(function() {
     const SHOWING_ON = "showing";
     var firstform = $("form[role='form']");
     $(document).on("click", "#nextButton", function(e) {
-        rewardNextStep();
-        firstform.submit();
+    	if(vaildCheck()) {
+    		rewardNextStep();
+            firstform.submit();
+    	}
+    	else {
+    		return;
+    	}
     });
+    
+  
+   	// 페이지 로딩 시 남은 수량에 따라 체크 버튼 비활성화 = 마감표시
+    $('.check_box_js').each(function(idx) {
+    	var rewardId = $(this).val();
+    	var limitCnt = $("#reward_sell_count" + rewardId).val() * 1;
+        var remainCnt = $("#reward_remain_count" + rewardId).val() * 1;
 
+        if(remainCnt != 0) { 
+        	$(this).attr("disabled", false);  
+    	} else {
+    	    $(this).attr("disabled", true); 
+    	    $(this).parent().append('<span>마감되었습니다.</span>');
+    	}
+    }); 
 
-    // 뒤로가기 시 페이지 리로딩
-    $(window).bind("pageshow", function(event) {
-        if (event.originalEvent.persisted) {
-            document.location.reload();
+    // 뒤로가기 시 체크버튼, 수량 값, 금액 초기화
+    $(window).on("pageshow", function(event) {
+    	if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+    		//뒤로가기시 페이지 새로고침인데 너무 느리다.
+    		//document.location.reload();	
+            // 체크박스 해제, 각 리워드별 수량 초기화
+            $('.check_box_js').each(function(idx) { 
+            	var rewardId = $(this).val();
+            	$(this).attr("checked", false);
+            	$("#qty" + rewardId).val(0);
+            });
+            // 후원금 0원으로 초기화
+            $('#addDonation').val(0);
+            // 총 금액 계산 0으로 초기화
+            calculateTotal();
         }
-        //  numberWithCommas();
-        calculateTotal();
     });
 
     // 체크박스 유무 확인 후 클래스 추가, 제거	      
@@ -125,7 +151,7 @@ $(function() {
         });
         var addDonation = $('#addDonation').val();
         if (addDonation == '') {
-            addDonation = 0;
+            addDonation = 0 * 1;
         }
         selectSumTotal = fundingPrice + addDonation * 1;
         $('#sumTotalNum').html(selectSumTotal.format() + '원');
@@ -133,6 +159,9 @@ $(function() {
 
     function calculateReward(rewardId) {
         var calQty = $('#qty' + rewardId).val();
+        if (addDonation == '') {
+        	calQty = 0 * 1;
+        }
         var calPrice = $('#reward_price' + rewardId).val();
         return calQty * calPrice;
     }
@@ -270,6 +299,8 @@ $(function() {
     // 수량체크시 중복되는 유효성검사
     function countValidation(rewardId, before_qty) {
         /* console.log(rewardId) */
+        // qty : 리워드별 주문자가 선택한 수량
+        // remain_cnt : 서버에서 전달된 리워드 별 남은수량
         var limitCnt = $("#reward_sell_count" + rewardId).val() * 1;
         var remainCnt = ($("#reward_remain_count" + rewardId).val() * 1);
         var qty = $("#qty" + rewardId)
@@ -320,11 +351,27 @@ $(function() {
                 //리워드 별 금액
                 var sumAmount = parseInt(reward_price) * parseInt(qty);
                 
+                // qty : 리워드별 주문자가 선택한 수량
+                // remain_cnt : 서버에서 전달된 리워드 별 남은수량
                 $('[role="form"]').append('<input type="hidden" name="list[' + idx + '].reward_id" value="' + rewardId + '" />');
                 $('[role="form"]').append('<input type="hidden" name="list[' + idx + '].qty" value="' + qty + '" />');
                 $('[role="form"]').append('<input type="hidden" name="list[' + idx + '].sumAmount" value="' + sumAmount + '" />');
             };
         });
+    }
+    /*버튼 클릭 시 체크 유무 확인 */
+    function vaildCheck() {
+    	var check_count=0;
+    	$('.check_box_js').each(function(idx) {
+    		if ($(this).is(":checked")) {
+    			check_count++;
+    		}
+    	});
+    	if (check_count<=0) {
+    		alert('최소 하나의 리워드를 체크하여야합니다.');
+    		return false;
+    	}
+    	return true;
     }
 });
 </script>

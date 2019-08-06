@@ -1,7 +1,5 @@
 package com.crowd.funding.reward.domain;
 
-import java.util.List;
-
 import com.crowd.funding.myorder.domain.MyorderDTO;
 
 public class RewardDTO {
@@ -10,10 +8,19 @@ public class RewardDTO {
 	int mem_idx; // member_T의 키값
 	String reward_title;
 	int reward_price;
-	int reward_sell_count; // 리워드 판매가능한 갯수
-	int qty;
-	int sumAmount;
+	int reward_sell_count; // 리워드 판매가능한 갯수 
+	int sumAmount; // 각 리워드별 합산 
 	MyorderDTO myorderDTO;
+	int remain_count; // 각 리워드 별 남은 수량
+	int qty; // 사용자가 선택한 리워드별 수량
+	
+	public int getRemain_count() {
+		return remain_count;
+	}
+
+	public void setRemain_count(int remain_count) {
+		this.remain_count = remain_count;
+	}
 
 	public MyorderDTO getMyorderDTO() {
 		return myorderDTO;
@@ -70,13 +77,6 @@ public class RewardDTO {
 	public void setReward_sell_count(int reward_sell_count) {
 		this.reward_sell_count = reward_sell_count;
 	}
-	public int getQty() {
-		return qty;
-	}
-
-	public void setQty(int qty) {
-		this.qty = qty;
-	}
 
 	public int getSumAmount() {
 		return sumAmount;
@@ -85,4 +85,14 @@ public class RewardDTO {
 	public void setSumAmount(int sumAmount) {
 		this.sumAmount = sumAmount;
 	}
+
+	public int getQty() {
+		return qty;
+	}
+
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
+	
+
 }

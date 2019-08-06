@@ -6,6 +6,13 @@
 
 <mapper namespace= "com.crowd.funding.mapper.myorderMapper">
 
-
+<select id="my_reward_list">
+<!--group by를 추가하면 한개, 아니면 내가 여러번 산만큼 프로젝트를 보여주게된다.  -->
+	SELECT t1.pro_name, t1.pro_category,  t3.mem_name
+	FROM project as t1, 
+	(select * from myorder) as t2, 
+	member as t3 
+	WHERE t1.pro_id = t2.pro_id AND t2.mem_idx = t3.mem_idx AND t2.pro_id = 2 AND t2.mem_idx = 2; 
+</select>
 
 </mapper>

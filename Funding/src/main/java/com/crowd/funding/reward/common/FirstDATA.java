@@ -8,7 +8,7 @@ import com.crowd.funding.reward.domain.RewardDTO;
 public class FirstDATA {
 	int addDonation;
 	private ArrayList<RewardDTO> list;
-
+	
 	public ArrayList<RewardDTO> getList() {
 		return list;
 	}

@@ -18,12 +18,30 @@
 	String order_address4; //상세주소
 -->
 
+
 <mapper namespace= "com.crowd.funding.mapper.orderMapper">
 	<!-- 주문 창에서 입력한 내용 저장  -->
-	<insert id = "order_insert">
+	<insert id = "order_insert" useGeneratedKeys="true" keyProperty="order_id">
 		INSERT INTO  
-		REWARD_ORDER (mem_idx,order_address1,order_address2,order_address3,order_address4)
-		VALUES (2,#{order_address1},#{order_address2},#{order_address3},#{order_address4});
+		REWARD_ORDER (mem_idx, mem_email, order_name, mem_phone, order_address1,order_address2,order_address3,order_address4)
+		VALUES (2,#{mem_email},#{order_name},#{mem_phone},#{order_address1},#{order_address2},#{order_address3},#{order_address4});
 	</insert>
-
+	
+	<!--order에 저장한 후 myorder에도 저장하는데 다수 DTO 저장  -->
+	<insert id ="my_order_insert">
+		INSERT INTO myorder (mem_idx, pro_id, reward_id, order_count, order_id) 
+		VALUES 
+		<foreach separator="," item="item" collection="list">
+           (2,2,#{item.reward_id},#{item.order_count},#{item.order_id})
+        </foreach>
+	</insert>
+	
+	<select id="order_info" resultType="com.crowd.funding.order.domain.OrderDTO">
+		select order_name, mem_phone, CONCAT_WS(' ',order_address1, order_address3, order_address4) AS order_address_all
+		from reward_order
+		where mem_idx = #{mem_idx}
+		order by order_id desc
+		limit 1;
+	</select>
+	
 </mapper>

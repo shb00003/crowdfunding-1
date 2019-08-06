@@ -20,11 +20,15 @@
 	</insert>
 	
 	<!--펀딩하기 클릭시, 프로젝트 상세보기 시 보여지는 rewardDTO 리스트 반환  -->
+	<!--각 리워드 별 주문수량을 알기위해 group by를 하며 sum을 하였다.  -->
 	<select id="reward_all" resultMap="rewardMap">
-		SELECT * 
-		FROM REWARD_ITEM  t1
-		LEFT JOIN MYORDER t2 ON (t1.reward_id = t2.reward_id AND t1.pro_id = t2.pro_id) 
-		WHERE t1.pro_id = #{pro_id}
+		SELECT t1.reward_id, t1.pro_id, t1.mem_idx, t1.reward_title, t1.reward_price, t1.reward_sell_count, (reward_sell_count-qty) AS remain_count
+		FROM REWARD_ITEM AS t1,
+		(SELECT reward_id, sum(order_count) AS qty
+		FROM myorder
+		WHERE pro_id = #{pro_id}
+		group by reward_id) AS t2
+		WHERE t1.reward_id = t2.reward_id;
 	</select>
 	
 	<!--check box로 선택된 reward 반환  -->
@@ -37,6 +41,10 @@
         </foreach>
 	</select>
 
+	<select id="personinfo" resultType="com.crowd.funding.member.model.memberDTO">
+		select `mem_idx`,`mem_name`,`mem_phone`,`mem_email` from member where mem_idx = #{mem_idx} 
+	</select>
+	
 	<resultMap type="com.crowd.funding.reward.domain.RewardDTO" id="rewardMap">
 		<id column="reward_id" property="reward_id" />
 		<result column="pro_id" property="pro_id" />
@@ -44,6 +52,7 @@
 		<result column="reward_title" property="reward_title" />
 		<result column="reward_price" property="reward_price" />
 		<result column="reward_sell_count" property="reward_sell_count" />
+		<result column="remain_count" property="remain_count"/>
 		<!-- 1 : 다 관계의 경우 데이터 매핑시켜준다. 
 			association => 1 : 1 관계 
 			collection => 1 : 다 관계 (한명의 유저가 작성한 글 목록)
