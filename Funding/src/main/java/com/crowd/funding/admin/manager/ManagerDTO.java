@@ -1,5 +1,6 @@
 package com.crowd.funding.admin.manager;
 
+
 public class ManagerDTO {
 	
 	private String admin_id;

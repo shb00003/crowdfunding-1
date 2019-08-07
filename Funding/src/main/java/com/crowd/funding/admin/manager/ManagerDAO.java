@@ -9,4 +9,5 @@ public interface ManagerDAO {
 		public void updateManager(ManagerDTO dto);
 		public void deleteManager(String admin_id);
 		public ManagerDTO viewManager(String admin_id);
+		
 }

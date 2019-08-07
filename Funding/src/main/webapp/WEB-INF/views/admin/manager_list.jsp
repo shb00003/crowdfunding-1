@@ -33,6 +33,7 @@
 						<c:when test="${mana.admin_type=='2'}">관리자</c:when>
 					</c:choose></td>
 			</c:forEach>
+			
 		</tr>
 	</table>
 </body>

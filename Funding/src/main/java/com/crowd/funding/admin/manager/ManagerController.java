@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,5 +31,11 @@ public class ManagerController {
 	 * }
 	 */
 	
+	@RequestMapping("managerRegister.do")
+	public String register(@ModelAttribute ManagerDTO dto) {
+		managerService.insertManager(dto);
+		return "redirect:/admin/managerList.do";
+		
+	}
 
 }

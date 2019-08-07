@@ -19,9 +19,7 @@ public class ManagerServiceImpl implements ManagerService {
 
 	@Override
 	public void insertManager(ManagerDTO dto) {
-		
-		// TODO Auto-generated method stub
-
+		managerDao.insertManager(dto);
 	}
 
 	@Override

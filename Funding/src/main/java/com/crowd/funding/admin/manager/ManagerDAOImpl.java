@@ -22,7 +22,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 
 	@Override
 	public void insertManager(ManagerDTO dto) {
-		// TODO Auto-generated method stub
+		sql.insert("admin.insertManager");
 
 	}
 
