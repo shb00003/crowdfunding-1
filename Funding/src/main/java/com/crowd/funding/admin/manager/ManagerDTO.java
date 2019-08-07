@@ -1,6 +1,9 @@
 package com.crowd.funding.admin.manager;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/master
 public class ManagerDTO {
 	
 	private String admin_id;

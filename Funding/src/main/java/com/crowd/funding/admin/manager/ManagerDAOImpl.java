@@ -2,6 +2,7 @@ package com.crowd.funding.admin.manager;
 
 import java.util.List;
 
+<<<<<<< HEAD
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -42,6 +43,32 @@ public class ManagerDAOImpl implements ManagerDAO {
 	public ManagerDTO viewManager(String admin_id) {
 		// TODO Auto-generated method stub
 		return null;
+=======
+public class ManagerDAOImpl implements ManagerDAO {
+
+	@Override
+	public List<ManagerDTO> listManager() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertManager(ManagerDTO dto) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void updateManager(String admin_id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void deleteManager(ManagerDTO dto) {
+		// TODO Auto-generated method stub
+
+>>>>>>> refs/remotes/origin/master
 	}
 
 }

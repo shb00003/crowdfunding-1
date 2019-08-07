@@ -9,8 +9,11 @@
 </head>
 <body>
 	<%@ include file="../include/admin_menu.jsp"%>
+<<<<<<< HEAD
 <br>
 <a href="${path}/admin/managerList.do">관리자 리스트</a> |
+=======
+>>>>>>> refs/remotes/origin/master
 
 	<form name="adLogin" method="post">
 		<table>
