@@ -9,6 +9,8 @@
 </head>
 <body>
 	<%@ include file="../include/admin_menu.jsp"%>
+<br>
+<a href="${path}/admin/managerList.do">관리자 리스트</a> |
 
 	<form name="adLogin" method="post">
 		<table>

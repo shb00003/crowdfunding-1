@@ -4,22 +4,24 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.stereotype.Service;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
-@Service
-public class ManagerServiceImpl implements ManagerService {
-	
+import com.crowd.funding.admin.manager.ManagerDTO;
+
+@Repository
+public class ManagerDAOImpl implements ManagerDAO {
+
 	@Inject
-	ManagerDAO managerDao;
+	SqlSession sql;
 
 	@Override
 	public List<ManagerDTO> listManager() {
-		return managerDao.listManager();
+		return  sql.selectList("admin.managerList");
 	}
 
 	@Override
 	public void insertManager(ManagerDTO dto) {
-		
 		// TODO Auto-generated method stub
 
 	}
