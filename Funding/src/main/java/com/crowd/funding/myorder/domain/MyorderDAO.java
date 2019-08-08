@@ -1,8 +1,10 @@
 package com.crowd.funding.myorder.domain;
 
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
-@Repository
-public class MyorderDAO {
-	 
+import com.crowd.funding.myorder.common.MyorderDTOJoin;
+
+public interface MyorderDAO {
+	 public List<MyorderDTOJoin> rewardList(int mem_idx);
+	 public List<MyorderDTOJoin> orderList(MyorderDTOJoin myorderJoin);
 }

@@ -13,7 +13,7 @@
 <body>
 <form method="get">
 <input type="hidden" name="mem_idx" value="2">
-<a href="${path}/mypage/myreward/fundinglist?pro_id=2">결제내역으로 이동하기</a>
+<a href="${path}/mypage/myorder/fundinglist?pro_id=2">결제내역으로 이동하기</a>
 </form>
 </body>
 </html>

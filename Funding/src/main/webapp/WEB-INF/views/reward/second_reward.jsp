@@ -9,6 +9,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+        <!--멤버 나중에 받아야함.  -->
+        
+<form role="form" method="post" action="${path}/order/reservation">
+		<input type="hidden" name="mem_idx" value="2">
 <table>
 	<!--tr아래에 선언해야 total이 0으로 초기화가 되지 않음.  -->
 	<c:set var="total" value="0" />
@@ -21,6 +25,11 @@
 	<c:forEach items="${rewardSel.list}" var="reward2">
 		<c:if test="${reward2.reward_id != 0}">
 			<tr>
+				<td>
+				<input type="hidden"  class="select_count" value="${reward2.reward_id}">
+				<input type="hidden"  id="qty${reward2.reward_id}" value="${reward2.qty}">
+				<input type="hidden"  id="pro_id${reward2.reward_id}" value="${reward2.pro_id}">
+				</td>
 				<td>${reward2.reward_id}</td>
 				<td>${reward2.reward_title}</td>
 				<td>${reward2.qty}</td>
@@ -29,19 +38,29 @@
 			<c:set var="total" value="${total + reward2.sumAmount}"/>
 		</c:if>
 	</c:forEach>
-
+	<tr>
+		<td>후원금:  ${rewardSel.addDonation}</td>
+		<td>총 가격: <fmt:formatNumber pattern="###,###,###" value= "${total+rewardSel.addDonation}" /><span>원 </span></td>
+	</tr>
+	<tr>
 </table>
-<p>후원금 ${rewardSel.addDonation}</p>
-<span>총 가격:</span> <fmt:formatNumber pattern="###,###,###" value= "${total+rewardSel.addDonation}" /><span>원 </span>
 <p>펀딩 서포터 </p>
-<span>이름 </span>
-<span>이메일</span>
-<span>휴대폰번호</span>
+
+<p> 이름 : ${pinfo.mem_name} </p>
+<p> 이메일 : ${pinfo.mem_email} </p>
+<p> 휴대폰번호 : ${pinfo.mem_phone} </p>
 
 <br>
-<form role="form" method="post" action="${path}/order/reservation">
-이름 : <input type="text" name="order_name"> 	
-전화번호 : <input type="text" name="mem_phone"> 
+<p> 최근 주문 주소지 </p>
+이름 : <input type="text" value="${orderInfo.order_name}" readOnly>  
+전번 : <input type="text" value="${orderInfo.mem_phone}" readOnly>  
+<br>
+주소 : <input type="text" value="${orderInfo.order_address_all}" readOnly>  
+<p>-----------------------------------------------------------------------</p>
+<p>새로운 주소지</p>
+이름 : <input type="text" name="order_name" id="order_name_js"> 	
+전화번호 : <input type="text" name="mem_phone" id="mem_phone_js"> 
+이메일 : <input type="text" name="mem_email" id="mem_phone_js"> 
 <br><br>	
 
 <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="d_btn">
@@ -56,21 +75,34 @@
 
 <br>
 <br>
-<input id="rbtn" type="submit" value="결제예약하기"/>
+<input id="rbtn" type="button" value="결제예약하기"/>
 </form>
 </body>
 
 <script>
 $(document).ready(function() {
-
-	var formObj = $("form[role='form']");
+	/*  method="post" action="${path}/order/reservation"  */
+ 	var formObj = $("form[role='form']");
 	console.log(formObj);
-	
 	$("#rbtn").on("click", function() {
+		rewardNextStep();
 		formObj.submit();
 	});
+	
+	function rewardNextStep() {
+        $('.select_count').each(function(idx) {
+            var rewardId = $(this).val();
+            var qty = $('#qty' + rewardId).val();
+   		    var pro_id = $('#pro_id' + rewardId).val();
+			// 한번에 저장하기 위해 name을 배열로 전달한다. 
+            $('[role="form"]').append('<input type="hidden" name="orderList[' + idx + '].reward_id" value="' + rewardId + '" />');
+            $('[role="form"]').append('<input type="hidden" name="orderList[' + idx + '].order_count" value="' + qty + '" />');
+            $('[role="form"]').append('<input type="hidden" name="orderList[' + idx + '].pro_id" value="' + pro_id + '" />');
+        });
+    }
 });
 </script>
+
 
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script>
@@ -107,7 +139,7 @@ $(document).ready(function() {
                 
                 
                 // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-                if(roadAddr !== ''){
+               /*  if(roadAddr !== ''){
                     document.getElementById("sample4_extraAddress").value = extraRoadAddr;
                 } else {
                     document.getElementById("sample4_extraAddress").value = '';
@@ -127,7 +159,7 @@ $(document).ready(function() {
                 } else {
                     guideTextBox.innerHTML = '';
                     guideTextBox.style.display = 'none';
-                }
+                } */
             }
         }).open();
     }
