@@ -8,6 +8,8 @@
 <%@ include file="/WEB-INF/views/include/script.jsp"%>
 <link rel="stylesheet" href="${path}/resources/order/order.css">
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>리워드 step10 화면입니다.</title>
 </head>
 <body>
@@ -28,7 +30,7 @@
 				<td>리판매제한</td>
 				<td>리남은갯수</td>
 			</tr>
-
+	
 			<c:forEach items="${rewards}" var="reward" varStatus="status">
 				<!-- 값은 안넘기지만 유효성 검사나 현재페이지에 보여지기 위해 생성한 input type들 입니다.  -->
 				<input type="hidden" id="reward_sell_count${reward.reward_id}"
@@ -224,6 +226,7 @@ $(function() {
         btn.children('.before_qty').val(num);
         countValidation(rewardId, num);
         calculateTotal();
+        $(e.target.parentNode).children('.option')[0].remove();
 
     });
 
@@ -243,6 +246,15 @@ $(function() {
         btn.children('.before_qty').val(num);
         countValidation(rewardId, num);
         calculateTotal();
+        $(e.target.parentNode).append(
+        		`<div class='option'>
+        		<select name="rewardOptions" id="memo" onchange="optionChanged(this)">
+                <option value="블랙">화이트</option>
+                <option value="화이트">블랙</option>
+                <option value="블루">블루</option>
+                <option value="레드">레드</option>
+          	 	</select>
+          	 	</div>`);
     });
 
     //공개여부 

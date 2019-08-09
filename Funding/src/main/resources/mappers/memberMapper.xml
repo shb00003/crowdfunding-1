@@ -2,9 +2,28 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
 <!-- namespace 선언 -->
+<mapper namespace= "member">
+	
+	<resultMap type="com.crowd.funding.member.model.MemberDTO" id="memberMAP">
+				<!-- property="DTO의 변수명" column="DB의 컬럼명" -->
+		<id property="mem_idx" column="mem_idx" />
+		<result property="mem_type" column="mem_type"/>
+		<result property="mem_email" column="mem_email"/>
+		<result property="mem_password" column="mem_password"/>
+		<result property="mem_name" column="mem_name"/>
+		<result property="mem_phone" column="mem_phone"/>
+		<result property="mem_birth" column="mem_birth"/>
+		<result property="mem_sex" column="mem_sex"/>
+		<result property="mem_email_cert" column="mem_email_cert"/>
+		<result property="mem_register_datetime" column="mem_register_datetime"/>
+		<result property="mem_lastlogin_datetime" column="mem_lastlogin_datetime"/>
+	</resultMap>
+	
+	<select id="myinfo" resultType="com.crowd.funding.member.model.MemberDTO">
+		select * from member where mem_idx = #{mem_idx} 
+	</select>
 
-<mapper namespace= "com.spring.mapper.member">
-
-
+	
 </mapper>

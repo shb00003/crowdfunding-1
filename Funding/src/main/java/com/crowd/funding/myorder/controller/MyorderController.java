@@ -16,15 +16,20 @@ public class MyorderController {
 	@Inject
 	MyorderService myorderService;
 	
-	@RequestMapping("/myorder/fundinglist")
+	@RequestMapping("/myorder/orderlist")
 	// mem_idx 받아야함.
 	public String myRewardList(Model model, @RequestParam("pro_id") int pro_id) {
-		model.addAttribute("rewardList", myorderService.rewardList(2));
-		return "/myorder/myreward";
-	}
-	@RequestMapping("/myorder/orderlist")
-	public String myOrderList(Model model) {
+		model.addAttribute("rewardList", myorderService.orderList(2));
 		return "/myorder/orderlist";
+	}
+	@RequestMapping("/myorder/orderdetail")
+	public String myOrderList(Model model, @RequestParam("order_id") int order_id) {
+		model.addAttribute("orderinfo", myorderService.orderInfo(order_id));
+		model.addAttribute("proinfo", myorderService.proInfo(order_id));
+		model.addAttribute("meminfo", myorderService.memInfo(order_id));
+		model.addAttribute("shipinfo", myorderService.shipInfo(order_id));
+		model.addAttribute("rewardinfo", myorderService.rewardinfo(order_id));
+		return "/myorder/orderdetail";
 	}
 	
 	/*

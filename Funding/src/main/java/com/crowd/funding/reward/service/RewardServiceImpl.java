@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.crowd.funding.member.model.memberDTO;
+import com.crowd.funding.member.model.MemberDTO;
 import com.crowd.funding.reward.domain.RewardDAO;
 import com.crowd.funding.reward.domain.RewardDTO;
 
@@ -30,7 +30,7 @@ public class RewardServiceImpl implements RewardService {
 	}
 
 	@Override
-	public memberDTO personinfo(int mem_idx) throws Exception {
+	public MemberDTO personinfo(int mem_idx) throws Exception {
 		// TODO Auto-generated method stub
 		return rewardDAO.personinfo(mem_idx);
 	}

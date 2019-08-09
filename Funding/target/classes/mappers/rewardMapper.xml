@@ -41,7 +41,7 @@
         </foreach>
 	</select>
 
-	<select id="personinfo" resultType="com.crowd.funding.member.model.memberDTO">
+	<select id="personinfo" resultType="com.crowd.funding.member.model.MemberDTO">
 		select `mem_idx`,`mem_name`,`mem_phone`,`mem_email` from member where mem_idx = #{mem_idx} 
 	</select>
 	

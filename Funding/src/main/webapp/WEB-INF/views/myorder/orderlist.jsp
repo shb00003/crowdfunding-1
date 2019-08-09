@@ -24,7 +24,7 @@
 </tr>
 <c:forEach items="${rewardList}" var="rewardlist">
 <tr>
-	<td><a href="${path}/mypage/myreward/orderlist?pro_id=2">${rewardlist.pro_name}</a></td>
+	<td><a href="${path}/mypage/myorder/orderdetail?order_id=${rewardlist.order_id}">${rewardlist.pro_name}</a></td>
 	<td>${rewardlist.pro_category }</td>
 	<td>${rewardlist.mem_name}</td>
 	<td>${rewardlist.order_id}</td>

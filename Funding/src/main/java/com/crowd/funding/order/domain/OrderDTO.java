@@ -3,9 +3,9 @@ package com.crowd.funding.order.domain;
 public class OrderDTO {
 	int order_id; // reward_order_T 의 PrimaryKey
 	int mem_idx; // member_T의 primary Key
-	String mem_email; 
-	String order_name;
-	String mem_phone;
+	String order_name; // 주문 창에서 입력하는 name
+	String order_phone; // 주문 창에서 입력하는 phone
+	String order_email; // 주문 창에서 입력하는 email
 	int total_money; // 최종 금액 이나 필요 없을 수 있다.getTotalMoney 함수로 대체 가능함.
 	String order_requests;
 	int order_status;
@@ -33,11 +33,17 @@ public class OrderDTO {
 	public void setMem_idx(int mem_idx) {
 		this.mem_idx = mem_idx;
 	}
-	public String getMem_email() {
-		return mem_email;
+	public String getOrder_phone() {
+		return order_phone;
 	}
-	public void setMem_email(String mem_email) {
-		this.mem_email = mem_email;
+	public void setOrder_phone(String order_phone) {
+		this.order_phone = order_phone;
+	}
+	public String getOrder_email() {
+		return order_email;
+	}
+	public void setOrder_email(String order_email) {
+		this.order_email = order_email;
 	}
 	public String getOrder_name() {
 		return order_name;
@@ -45,12 +51,7 @@ public class OrderDTO {
 	public void setOrder_name(String order_name) {
 		this.order_name = order_name;
 	}
-	public String getMem_phone() {
-		return mem_phone;
-	}
-	public void setMem_phone(String mem_phone) {
-		this.mem_phone = mem_phone;
-	}
+	
 	public int getTotal_money() {
 		return total_money;
 	}

@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.crowd.funding.member.model.memberDTO;
+import com.crowd.funding.member.model.MemberDTO;
 
 @Repository
 public class RewardDAOImpl implements RewardDAO {
@@ -33,7 +33,7 @@ public class RewardDAOImpl implements RewardDAO {
 	}
 
 	@Override
-	public memberDTO personinfo(int mem_idx) throws Exception {
+	public MemberDTO personinfo(int mem_idx) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+".personinfo", mem_idx);
 	}
 

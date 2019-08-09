@@ -2,7 +2,7 @@ package com.crowd.funding.member.model;
 
 import java.util.Date;
 
-public class memberDTO {
+public class MemberDTO {
 
 	// 회원가입시 받을 최소 정보
 	private int mem_idx;

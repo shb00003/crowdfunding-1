@@ -53,14 +53,14 @@
 <br>
 <p> 최근 주문 주소지 </p>
 이름 : <input type="text" value="${orderInfo.order_name}" readOnly>  
-전번 : <input type="text" value="${orderInfo.mem_phone}" readOnly>  
+전번 : <input type="text" value="${orderInfo.order_phone}" readOnly>  
 <br>
 주소 : <input type="text" value="${orderInfo.order_address_all}" readOnly>  
 <p>-----------------------------------------------------------------------</p>
 <p>새로운 주소지</p>
 이름 : <input type="text" name="order_name" id="order_name_js"> 	
-전화번호 : <input type="text" name="mem_phone" id="mem_phone_js"> 
-이메일 : <input type="text" name="mem_email" id="mem_phone_js"> 
+전화번호 : <input type="text" name="order_phone" id="order_phone_js"> 
+이메일 : <input type="text" name="order_email" id="order_phone_js"> 
 <br><br>	
 
 <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="d_btn">

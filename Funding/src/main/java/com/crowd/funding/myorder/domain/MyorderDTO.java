@@ -2,7 +2,7 @@ package com.crowd.funding.myorder.domain;
 
 import java.util.ArrayList;
 
-import com.crowd.funding.member.model.memberDTO;
+import com.crowd.funding.member.model.MemberDTO;
 import com.crowd.funding.order.domain.OrderDTO;
 import com.crowd.funding.project.domain.ProjectDTO;
 import com.crowd.funding.reward.domain.RewardDTO;
@@ -14,7 +14,17 @@ public class MyorderDTO {
 	 int reward_id; // reward_item_T primary key
 	 int order_count; // 리워드 구매 갯수
      int order_id; // reward_order_T primary key
+     String order_date; // 주문한 날짜
 	 private ArrayList<MyorderDTO> orderList;
+
+	 
+	public String getOrder_date() {
+		return order_date;
+	}
+
+	public void setOrder_date(String order_date) {
+		this.order_date = order_date;
+	}
 
 	public ArrayList<MyorderDTO> getOrderList() {
 		return orderList;

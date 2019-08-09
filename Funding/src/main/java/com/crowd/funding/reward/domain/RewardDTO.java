@@ -13,7 +13,26 @@ public class RewardDTO {
 	MyorderDTO myorderDTO;
 	int remain_count; // 각 리워드 별 남은 수량
 	int qty; // 사용자가 선택한 리워드별 수량
+	String reward_description; // 리워드 상세설명
+	String reward_option_detail; // 리워드 옵션
 	
+	
+	public String getReward_description() {
+		return reward_description;
+	}
+
+	public void setReward_description(String reward_description) {
+		this.reward_description = reward_description;
+	}
+
+	public String getReward_option_detail() {
+		return reward_option_detail;
+	}
+
+	public void setReward_option_detail(String reward_option_detail) {
+		this.reward_option_detail = reward_option_detail;
+	}
+
 	public int getRemain_count() {
 		return remain_count;
 	}
